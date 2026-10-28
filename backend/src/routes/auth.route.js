@@ -5,6 +5,7 @@ import { arcjetProtection } from "../middleware/arcjet.middleware.js"
 
 const router = express.Router()
 
+// middleware used in every route
 router.use(arcjetProtection)
 
 router.post("/signup", signup)

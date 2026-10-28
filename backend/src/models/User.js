@@ -22,8 +22,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     default: ""
   }
-}, {timestamps: true}) // createdAt & updatedAt
+}, { timestamps: true })   // createdAt & updatedAt
 
 const User = mongoose.model("User", userSchema)
-
 export default User
