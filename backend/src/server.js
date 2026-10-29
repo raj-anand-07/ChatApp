@@ -2,6 +2,7 @@ import express from "express"
 import "dotenv/config";
 import path from "path"
 import cookieParser from "cookie-parser"
+import cors from "cors"
 import authRoutes from "./routes/auth.route.js"
 import messageRoutes from "./routes/message.route.js"
 import { connectDB } from "./lib/db.js"
@@ -10,6 +11,7 @@ const app = express()
 
 // middleware
 app.use(express.json())  // req.body
+app.use(cors({ origin: process.env.CLIENT_URL, credentials: true }))
 app.use(cookieParser())
 
 app.use("/api/auth", authRoutes)
@@ -17,7 +19,7 @@ app.use("/api/messages", messageRoutes)
 
 // make ready for deployment 
 const __dirname = path.resolve()
-if(process.env.NODE_ENV === "production") {
+if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "../frontend/dist")))
 
   app.get("*", (_, res) => {
