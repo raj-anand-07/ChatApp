@@ -1,5 +1,6 @@
 import jwt from "jsonwebtoken"
 import User from "../models/User.js"
+import { ENV } from "../lib/env.js"
 
 export const socketAuthMiddleware = async (socket, next) => {
   try {
@@ -36,7 +37,7 @@ export const socketAuthMiddleware = async (socket, next) => {
 
     next()
   } catch (error) {
-    console.log("Error in socket authentication: ", error.message)
+    console.log("Error in socket authentication:", error.message)
     next(new Error("Unauthorized - Authentication failed"))
   }
 }

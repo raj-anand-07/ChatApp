@@ -1,13 +1,13 @@
-import { useState } from "react";
-import useKeyboardSound from "../hooks/useKeyboardSound.js";
-import { useChatStore } from "../store/useChatStore.js";
+import { useRef, useState } from "react";
+import useKeyboardSound from "../hooks/useKeyboardSound";
+import { useChatStore } from "../store/useChatStore";
 import toast from "react-hot-toast";
-import {ImageIcon, XIcon, SendIcon } from "lucide-react";
+import { ImageIcon, SendIcon, XIcon } from "lucide-react";
 
 function MessageInput() {
   const { playRandomKeyStrokeSound } = useKeyboardSound();
-  const [text, setText] = useState();
-  const [imagePreview, setImagePreview] = useState();
+  const [text, setText] = useState("");
+  const [imagePreview, setImagePreview] = useState(null);
 
   const fileInputRef = useRef(null);
 
@@ -46,7 +46,7 @@ function MessageInput() {
   };
 
   return (
-    <div>
+    <div className="p-4 border-t border-slate-700/50">
       {imagePreview && (
         <div className="max-w-3xl mx-auto mb-3 flex items-center">
           <div className="relative">

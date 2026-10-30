@@ -1,19 +1,35 @@
 import { useEffect, useRef } from "react";
-import { useChatStore } from "../store/useChatStore.js";
-import { useAuthStore } from "../store/useAuthStore.js";
-import ChatHeader from "./ChatHeader.jsx";
-import NoChatHistoryPlaceholder from "./NoChatHistoryPlaceholder.jsx";
-import MessageInput from "./MessageInput.jsx";
-import MessagesLoadingSkeleton from "./MessagesLoadingSkeleton.jsx";
+import { useAuthStore } from "../store/useAuthStore";
+import { useChatStore } from "../store/useChatStore";
+import ChatHeader from "./ChatHeader";
+import NoChatHistoryPlaceholder from "./NoChatHistoryPlaceholder";
+import MessageInput from "./MessageInput";
+import MessagesLoadingSkeleton from "./MessagesLoadingSkeleton";
 
 function ChatContainer() {
-  const { selectedUser, messages, isMessagesLoading, getMessagesByUserId } = useChatStore();
+  const {
+    selectedUser,
+    getMessagesByUserId,
+    messages,
+    isMessagesLoading,
+    subscribeToMessages,
+    unsubscribeFromMessages,
+  } = useChatStore();
   const { authUser } = useAuthStore();
-  const messageEndRef = useRef();
+  const messageEndRef = useRef(null);
 
   useEffect(() => {
     getMessagesByUserId(selectedUser._id);
-  }, [selectedUser, getMessagesByUserId]);
+    subscribeToMessages();
+
+    // clean up
+    return () => unsubscribeFromMessages();
+  }, [
+    selectedUser,
+    getMessagesByUserId,
+    subscribeToMessages,
+    unsubscribeFromMessages,
+  ]);
 
   useEffect(() => {
     if (messageEndRef.current) {
@@ -39,7 +55,7 @@ function ChatContainer() {
                   {msg.image && (
                     <img
                       src={msg.image}
-                      alt="shared"
+                      alt="Shared"
                       className="rounded-lg h-48 object-cover"
                     />
                   )}

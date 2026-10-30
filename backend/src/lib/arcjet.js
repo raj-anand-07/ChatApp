@@ -1,9 +1,10 @@
-import arcjet, { shield, detectBot, slidingWindow } from "@arcjet/node";
+import arcjet, { shield, detectBot, slidingWindow } from "@arcjet/node"
+import { ENV } from "./env.js"
 
 const aj = arcjet({
-  key: process.env.ARCJET_KEY,
+  key: ENV.ARCJET_KEY,
   rules: [
-    // Shield protects your app from common attacks such as SQL injection
+    // Shield protects your app from common attacks e.g. SQL injection
     shield({ mode: "LIVE" }),
     // Create a bot detection rule
     detectBot({
@@ -14,16 +15,16 @@ const aj = arcjet({
         // Uncomment to allow these other common bot categories
         // See the full list at https://arcjet.com/bot-list
         //"CATEGORY:MONITOR", // Uptime monitoring services
-        //"CATEGORY:PREVIEW", // Link previews such as Slack, Discord
+        //"CATEGORY:PREVIEW", // Link previews e.g. Slack, Discord
       ],
     }),
     // Create a token bucket rate limit. Other algorithms are supported.
     slidingWindow({
       mode: "LIVE", // Blocks requests. Use "DRY_RUN" to log only
       max: 100,   // max 100 requests in 60 secs interval
-      interval: 60 
+      interval: 60,
     }),
   ],
-});
+})
 
 export default aj
