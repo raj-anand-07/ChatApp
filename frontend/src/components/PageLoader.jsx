@@ -1,4 +1,4 @@
-import { LoaderIcon } from "Lucide-react";
+import { LoaderIcon } from "lucide-react";
 
 function PageLoader() {
   return (

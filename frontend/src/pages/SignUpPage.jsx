@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useAuthStore } from "../store/useAuthStore";
 import BorderAnimatedContainer from "../components/BorderAnimatedContainer";
-import { Link } from "react-router";
 import {
   MessageCircleIcon,
   LockIcon,
@@ -9,6 +8,7 @@ import {
   UserIcon,
   LoaderIcon,
 } from "lucide-react";
+import { Link } from "react-router";
 
 function SignUpPage() {
   const [formData, setFormData] = useState({
@@ -24,8 +24,8 @@ function SignUpPage() {
   };
 
   return (
-    <div className="w-full flex items-center justify-center p-6 bg-slate-900">
-      <div className="relative w-full max-w-6xl md:h-[650px] h-[650px]">
+    <div className="w-full flex items-center justify-center p-6 bg-slate-900">   {/* changed css */}
+      <div className="relative w-full max-w-6xl md:h-[650px] h-[650px]">   {/* changed css */}
         <BorderAnimatedContainer>
           <div className="w-full flex flex-col md:flex-row">
             {/* FORM CLOUMN - LEFT SIDE */}
@@ -119,7 +119,7 @@ function SignUpPage() {
             </div>
 
             {/* FORM ILLUSTRATION - RIGHT SIDE */}
-            <div className="hidden md:w-1/2 md:flex items-center justify-center p-16 bg-gradient-to-bl from-slate-800/20 to-transparent">
+            <div className="hidden md:w-1/2 md:flex items-center justify-center p-16 bg-gradient-to-bl from-slate-800/20 to-transparent">   {/* changed css */}
               <div>
                 <img
                   src="/signup.png"
@@ -145,4 +145,5 @@ function SignUpPage() {
     </div>
   );
 }
+
 export default SignUpPage;

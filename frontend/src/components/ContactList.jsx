@@ -1,19 +1,18 @@
-import { useEffect } from 'react'
-import { useChatStore } from '../store/useChatStore.js';
-import UsersLoadingSkeleton from "./UsersLoadingSkeleton.jsx";
-import { useAuthStore } from '../store/useAuthStore.js';
-
+import { useEffect } from "react";
+import { useChatStore } from "../store/useChatStore";
+import UsersLoadingSkeleton from "./UsersLoadingSkeleton";
+import { useAuthStore } from "../store/useAuthStore";
 
 function ContactList() {
-    const {getAllContacts, allContacts, setSelectedUser, isUsersLoading} = useChatStore();
-    const {onlineUsers} = useAuthStore()
+  const { getAllContacts, allContacts, setSelectedUser, isUsersLoading } = useChatStore();
+  const { onlineUsers } = useAuthStore();
 
-    useEffect(() => {
-      getAllContacts()
-    },[getAllContacts])
+  useEffect(() => {
+    getAllContacts();
+  }, [getAllContacts]);
 
-    if (isUsersLoading) return <UsersLoadingSkeleton />;
-  
+  if (isUsersLoading) return <UsersLoadingSkeleton />;
+
   return (
     <>
       {allContacts.map((contact) => (
@@ -25,10 +24,7 @@ function ContactList() {
           <div className="flex items-center gap-3">
             <div className={`avatar ${onlineUsers.includes(contact._id) ? "online" : "offline"}`}>
               <div className="size-12 rounded-full">
-                <img
-                  src={contact.profilePic || "/avatar.png"}
-                  alt={contact.fullName}
-                />
+                <img src={contact.profilePic || "/avatar.png"} />
               </div>
             </div>
             <h4 className="text-slate-200 font-medium truncate">
@@ -41,4 +37,4 @@ function ContactList() {
   );
 }
 
-export default ContactList
+export default ContactList;

@@ -1,10 +1,10 @@
 import { Navigate, Route, Routes } from "react-router";
-import ChatPage from "./pages/ChatPage";
-import LoginPage from "./pages/LoginPage";
-import SignUpPage from "./pages/SignUpPage";
-import { useAuthStore } from "./store/useAuthStore";
+import ChatPage from "./pages/ChatPage.jsx";
+import LoginPage from "./pages/LoginPage.jsx";
+import SignUpPage from "./pages/SignUpPage.jsx";
+import { useAuthStore } from "./store/useAuthStore.js";
 import { useEffect } from "react";
-import PageLoader from "./components/PageLoader";
+import PageLoader from "./components/PageLoader.jsx";
 import { Toaster } from "react-hot-toast";
 
 function App() {
@@ -26,7 +26,7 @@ function App() {
       <Routes>
         <Route
           path="/"
-          element={<ChatPage />}
+          element={authUser ? <ChatPage /> : <Navigate to={"/login"} />}
         />
         <Route
           path="/login"
