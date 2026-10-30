@@ -1,13 +1,13 @@
 import express from "express"
-import "dotenv/config";
+import "dotenv/config"
 import path from "path"
 import cookieParser from "cookie-parser"
 import cors from "cors"
+
 import authRoutes from "./routes/auth.route.js"
 import messageRoutes from "./routes/message.route.js"
 import { connectDB } from "./lib/db.js"
-
-const app = express()
+import { app, server } from "./lib/socket.js"
 
 // middleware
 app.use(express.json({ limit: "5mb" }))  // req.body
@@ -28,7 +28,7 @@ if (process.env.NODE_ENV === "production") {
 }
 
 const PORT = process.env.PORT || 3000
-app.listen(PORT, () => {
+server.listen(PORT, () => {
   console.log("Server is ruuning on PORT: " + PORT)
   connectDB()
 })
